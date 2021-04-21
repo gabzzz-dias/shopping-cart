@@ -71,6 +71,18 @@ function createProductItemElement({ sku, name, image }) {
   return section;
 }
 
+const load = () => {
+  const itemSection = document.querySelector('.items');
+  const text = document.createElement('span');
+  text.className = 'load';
+  text.innerText = 'loading...';
+  itemSection.appendChild(text);
+};
+
+const removeLoad = () => {
+  document.querySelector('.load').remove();
+};
+
 const showItems = async () => {
   const itemData = await fetchItems();
   const itemList = document.querySelector('.items');
@@ -83,6 +95,9 @@ const showItems = async () => {
   });
 };
 
-window.onload = function onload() {
+window.onload = async function onload() {
+  load();
+  await fetchItems();
   showItems();
+  removeLoad();
 };
