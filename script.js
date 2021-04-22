@@ -104,8 +104,6 @@ const removeAllItems = () => {
 
   function removeCart() {
     cart.innerHTML = '';
-    const price = 0;
-    totalPrice.innerText = price;
     localStorage.clear();
   }
   emptyBtn.addEventListener('click', removeCart);
