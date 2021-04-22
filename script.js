@@ -97,6 +97,23 @@ const showItems = async () => {
   });
 };
 
+const removeAllItems = () => {
+  const emptyBtn = document.querySelector('.empty-cart');
+  const cart = document.querySelector('.cart__items');
+  const totalPrice = document.querySelector('.total-price');
+
+  function removeCart() {
+    cart.innerHTML = '';
+    price = 0;
+    totalPrice.innerText = price;
+    localStorage.clear();
+  }
+  emptyBtn.addEventListener('click', removeCart);
+};
+
+// Requisito 6 feito com a ajuda do meu colega Aladino Borges, da turma 10-B
+
 window.onload = function onload() {
   showItems();
+  removeAllItems();
 };
