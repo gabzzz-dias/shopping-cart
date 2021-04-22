@@ -5,10 +5,11 @@ function createProductImageElement(imageSource) {
   return img;
 }
 
-const cartItems = document.querySelector('.cart__items');
-function saveLocalStorage() {
-  localStorage.setItem('cart', cartItems.innerHTML);
-}
+const cartItems = '.cart__items';
+
+const saveLocalStorage = () => {
+  localStorage.setItem('cart', document.querySelector(cartItems).innerHTML);
+};
 
 function createCustomElement(element, className, innerText) {
   const e = document.createElement(element);
@@ -53,7 +54,7 @@ async function addToCart(event) {
     name: item.title,
     salePrice: item.price,
   });
-  cartItems.appendChild(add);
+  document.querySelector(cartItems).appendChild(add);
   saveLocalStorage();
 }
 
@@ -106,9 +107,10 @@ const showItems = async () => {
 
 const removeAllItems = () => {
   const emptyBtn = document.querySelector('.empty-cart');
+  const cart = document.querySelector(cartItems);
 
   function removeCart() {
-    cartItems.innerHTML = '';
+    cart.innerHTML = '';
     localStorage.clear();
     saveLocalStorage();
   }
@@ -119,7 +121,7 @@ const removeAllItems = () => {
 
 const getCart = () => {
   const saved = localStorage.getItem('cart');
-  cartItems.innerHTML = saved;
+  document.querySelector(cartItems).innerHTML = saved;
 };
 
 window.onload = function onload() {
