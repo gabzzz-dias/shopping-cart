@@ -104,7 +104,7 @@ const removeAllItems = () => {
 
   function removeCart() {
     cart.innerHTML = '';
-    price = 0;
+    const price = 0;
     totalPrice.innerText = price;
     localStorage.clear();
   }
