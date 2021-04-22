@@ -5,6 +5,10 @@ function createProductImageElement(imageSource) {
   return img;
 }
 
+const saveLocalStorage = () => {
+  localStorage.setItem('cart', document.querySelector('.cart__items').innerHTML);
+};
+
 function createCustomElement(element, className, innerText) {
   const e = document.createElement(element);
   e.className = className;
@@ -25,9 +29,10 @@ function getSkuFromProductItem(item) {
 
 // Para resolver o requisito 2 obtive ajuda do meu colega de turma Leandro Reis, consultando seu PR para entender a lógica por trás desse requisito. src: https://github.com/tryber/sd-010-b-project-shopping-cart/pull/6
 
-function cartItemClickListener(event) {
+async function cartItemClickListener(event) {
   const removeItem = event.target;
   removeItem.parentNode.removeChild(removeItem);
+  saveLocalStorage();
 }
 
 function createCartItemElement({ sku, name, salePrice }) {
@@ -48,6 +53,7 @@ async function addToCart(event) {
     salePrice: item.price,
   });
   document.querySelector('.cart__items').appendChild(add);
+  saveLocalStorage();
 }
 
 function createProductItemElement({ sku, name, image }) {
@@ -104,13 +110,21 @@ const removeAllItems = () => {
   function removeCart() {
     cart.innerHTML = '';
     localStorage.clear();
+    saveLocalStorage();
   }
   emptyBtn.addEventListener('click', removeCart);
 };
 
 // Requisito 6 feito com a ajuda do meu colega Aladino Borges, da turma 10-B
 
+const getCart = () => {
+  const saved = localStorage.getItem('cart');
+  document.querySelector('.cart__items').innerHTML = saved;
+};
+
 window.onload = function onload() {
   showItems();
+  getCart();
   removeAllItems();
+  cartItemClickListener();
 };
