@@ -100,7 +100,6 @@ const showItems = async () => {
 const removeAllItems = () => {
   const emptyBtn = document.querySelector('.empty-cart');
   const cart = document.querySelector('.cart__items');
-  const totalPrice = document.querySelector('.total-price');
 
   function removeCart() {
     cart.innerHTML = '';
