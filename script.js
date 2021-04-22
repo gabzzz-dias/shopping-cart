@@ -1,10 +1,3 @@
-const fetchItems = async () => {
-  const result = await fetch('https://api.mercadolibre.com/sites/MLB/search?q=$computador');
-  const jSon = await result.json();
-  const final = await jSon.results;
-  return final;
-};
-
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -79,8 +72,17 @@ const load = () => {
   itemSection.appendChild(text);
 };
 
-const removeLoad = () => {
+function removeLoad() {
   document.querySelector('.load').remove();
+}
+
+const fetchItems = async () => {
+  load();
+  const result = await fetch('https://api.mercadolibre.com/sites/MLB/search?q=$computador');
+  const jSon = await result.json();
+  const final = await jSon.results;
+  removeLoad();
+  return final;
 };
 
 const showItems = async () => {
@@ -95,9 +97,6 @@ const showItems = async () => {
   });
 };
 
-window.onload = async function onload() {
-  load();
-  await fetchItems();
+window.onload = function onload() {
   showItems();
-  removeLoad();
 };
