@@ -67,7 +67,7 @@ function createProductItemElement({ sku, name, image }) {
 const load = () => {
   const itemSection = document.querySelector('.items');
   const text = document.createElement('span');
-  text.className = 'load';
+  text.className = 'loading';
   text.innerText = 'loading...';
   itemSection.appendChild(text);
 };
