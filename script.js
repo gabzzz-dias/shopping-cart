@@ -73,7 +73,7 @@ const load = () => {
 };
 
 function removeLoad() {
-  document.querySelector('.load').remove();
+  document.querySelector('.loading').remove();
 }
 
 const fetchItems = async () => {
