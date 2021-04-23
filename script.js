@@ -29,11 +29,24 @@ function getSkuFromProductItem(item) {
   return item.querySelector('span.item__sku').innerText;
 }
 
-// Para resolver o requisito 2 obtive ajuda do meu colega de turma Leandro Reis, consultando seu PR para entender a lógica por trás desse requisito. src: https://github.com/tryber/sd-010-b-project-shopping-cart/pull/6
+// Para resolver os requisitos 2 e 5 obtive ajuda do meu colega de turma Leandro Reis, consultando seu PR para entender a lógica por trás desse requisito. src: https://github.com/tryber/sd-010-b-project-shopping-cart/pull/6
+// sustring / indexOf src: https://www.devmedia.com.br/javascript-substring-selecionando-parte-de-uma-string/39232
+
+function sumAndSub() {
+  const items = document.getElementsByClassName('cart__item');
+  let result = 0;
+  for (let index = 0; index < items.length; index += 1) {
+    const price = items[index].innerText.substring(items[index].innerText.indexOf('$') + 1);
+    result += parseFloat(price);
+  }
+  const finalPrice = document.querySelector('.total-price');
+  finalPrice.innerText = Math.round(result * 100) / 100;
+}
 
 async function cartItemClickListener(event) {
   const removeItem = event.target;
   removeItem.parentNode.removeChild(removeItem);
+  sumAndSub();
   saveLocalStorage();
 }
 
@@ -56,6 +69,7 @@ async function addToCart(event) {
   });
   document.querySelector(cartItems).appendChild(add);
   saveLocalStorage();
+  sumAndSub();
 }
 
 function createProductItemElement({ sku, name, image }) {
@@ -111,6 +125,8 @@ const removeAllItems = () => {
 
   function removeCart() {
     cart.innerHTML = '';
+    const getPrice = document.querySelector('.total-price');
+    getPrice.innerText = 0;
     localStorage.clear();
     saveLocalStorage();
   }
