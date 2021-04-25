@@ -133,7 +133,8 @@ const removeAllItems = () => {
   emptyBtn.addEventListener('click', removeCart);
 };
 
-// Requisito 6 feito com a ajuda do meu colega Aladino Borges, da turma 10-B
+// Requisito 6 feito com a ajuda do meu colega Aladino Borges, da turma 10-B, dando uma conferida no seu Pull Request para entender melhor a lógica desse Requisito.
+// src: https://github.com/tryber/sd-010-b-project-shopping-cart/pull/119
 
 const getCart = () => {
   const saved = localStorage.getItem('cart');
